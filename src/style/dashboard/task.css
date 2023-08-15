@@ -1,0 +1,35 @@
+.tasks-section {
+    width: 38vh;
+    border: 1px solid #fff;
+    border-radius: 9px;
+    padding: 3vh;
+    box-shadow: 1px 1px 1px 1px #0000003d;
+}
+
+#detail {
+    color: #868697;
+}
+
+#task-list {
+    margin-top: 23px;
+}
+
+#header , #task{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 22px;
+
+}
+
+#header button {
+    border-radius: 11px;
+    border: #5c59f0;
+    background: #5C59E8;
+    color: #fff;
+    padding: 10px;
+}
+
+#task span {
+    color: #c0c200;
+    font-size: 5vh;
+}

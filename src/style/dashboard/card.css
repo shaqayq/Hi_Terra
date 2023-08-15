@@ -1,0 +1,88 @@
+.css-t4xawo {
+        grid-column: span 3 / auto;
+        background-color: rgb(255 255 255);
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        -webkit-box-pack: center;
+        justify-content: center;
+        border: 1px solid #fff;
+        box-shadow: 1px 1px 3px 1px #b7bbbf75;
+        border-radius: 9px;
+}
+
+.css-tdvis7 {
+    width: 100%;
+    margin: 0px 30px;
+}
+
+.css-gg4vpm {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.css-15goea3 {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    margin-top: 2px;
+}
+
+.css-1anx036 {
+    margin: 0px;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    letter-spacing: 0.0075em;
+}
+
+.css-147fwze {
+    margin: 0px;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 500;
+    font-size: 1.25rem;
+    line-height: 1.6;
+    letter-spacing: 0.0075em;
+    font-style: italic;
+}
+
+.css-ists20 {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 140px;
+    gap: 20px;
+}
+
+.icon1 , .icon2 , .icon3 , .icon4 {
+
+    border-radius: 20vh;
+    width: fit-content;
+    font-size: 25px;
+    color: #fff;
+    padding: 1vh;
+    margin-bottom: 11px;
+}
+.icon1{
+    background-color: #b32c98;
+}
+.icon2 {
+    background-color: #7abff4;
+}
+
+.icon3{
+    background-color: #ecefc5;
+}
+
+.icon4{
+    background-color: #189060;
+    color: #fff;
+}
+.css-1anx036 small {
+    background: #0080003b;
+    border-radius: 3vh;
+    color: #367536;
+    padding: 2px;
+    font-size: 11px;
+}

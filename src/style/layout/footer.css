@@ -1,0 +1,61 @@
+.footer{
+    display:flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+#footer-logo {
+    width: 20vh;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1vh;
+}
+
+#footer-heading {
+    font-size: 3vh;
+    font-weight: bold;
+    margin-bottom: 1vh;
+}
+
+.footer-list li{
+    padding: 6px;
+}
+
+#footer-pages , #footer-feature, #footer-message {
+    margin-top: 4vh;
+}
+
+#footer-txt {
+    display: flex;
+    justify-content: space-between;
+}
+
+#footer-txt i , #footer-message h6{
+    color: #5c59e8;
+}
+
+#apps{
+    display: flex;
+    margin-top: 2vh;
+
+}
+
+#apps button{
+    border-radius: 3vh;
+    padding: 5px;
+    width: 14vh;
+    justify-content: center;
+    display: flex;
+}
+
+#apple {
+    color: #fff;
+    background-color: #000;
+}
+
+#android {
+    border: 1px solid #b1b0b0;
+    margin-left: 2vh;
+}
+
