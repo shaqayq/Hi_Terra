@@ -4,6 +4,7 @@ import Index from "./components/dashboard/Index";
 import Contacts from "./components/contact/Contacts";
 import NewContact from "./components/contact/NewContact";
 import ViewContact from "./components/contact/ViewContact";
+import EditContact from "./components/contact/EditContact";
 import FooterSection from './layouts/FooterSection'
 import './style/app.css'
 import Login from "./components/auth/Login";
@@ -38,6 +39,8 @@ function AppContent() {
             <Route path="/contact-list" element={<Contacts/>} />
             <Route path="/add-contact" element={<NewContact/>} />/contact-detail
             <Route path="/contact-detail/:contact_id" element={<ViewContact/>} />
+            <Route path="/edit-contact/:contact_id" element={<EditContact/>} />
+
             <Route path="/login" element={<Login />} />
            
           </Routes>

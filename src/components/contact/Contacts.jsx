@@ -67,11 +67,11 @@ export default function Contacts() {
                   <td>{contact.address}</td>
                   <td>
                     <div className="table-actions">
-                    <button>
+                     <NavLink to={`/edit-contact/${contact.id}`}> 
                         <i id="edit">
                           <BsPencilSquare />
                         </i>{" "}
-                      </button>
+                        </NavLink>
                       <button >
                        <NavLink to={`/contact-detail/${contact.id}`}> 
                         <i id="view">

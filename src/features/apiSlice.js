@@ -5,6 +5,9 @@ export const terraApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api" }),
    idType: 'uuid',
   endpoints: (builder) => ({
+    getUsers: builder.query({
+      query: () => "users",
+    }),
     getFarms: builder.query({
       query: () => "getfarms",
     }),
@@ -35,15 +38,36 @@ export const terraApi = createApi({
     getContactDetail: builder.query({
       query: (id) => `contacts/${id}`, 
     }),
+
+    createContact: builder.mutation({
+      query: (contactData) => ({
+        url: 'contacts',
+        method: 'POST',
+        body: contactData,
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      }),
+    }),
+    editContact: builder.mutation({
+      query: ({ id, ...contactData }) => ({
+        url: `/contacts/${id}`,
+        method: 'PUT', 
+        body: contactData,
+      }),
+    }),
   }),
 });
 
 export const {
+  useGetUsersQuery,
   useGetFarmsQuery,
   useCountFarmsQuery,
   useCountFieldQuery,
   useContactListQuery,
   useLoginMutation,
   useDeleteContactMutation,
-  useGetContactDetailQuery
+  useGetContactDetailQuery,
+  useCreateContactMutation,
+  useEditContactMutation
 } = terraApi;

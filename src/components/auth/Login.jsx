@@ -15,6 +15,10 @@ export default function Login() {
 
     try {
       const response = await loginUser({ username, password });
+
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+       localStorage.setItem('access_token', response.data.access_token);
+
     } catch (error) {
       console.error("Login error:", error);
     }
@@ -22,7 +26,7 @@ export default function Login() {
 
   useEffect(() => {
     if (isSuccess) {
-     navigate('/') 
+     navigate('/home') 
     }
   }, [isSuccess, navigate]);
   return (
