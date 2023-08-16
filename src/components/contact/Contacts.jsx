@@ -1,41 +1,51 @@
-import React from 'react'
-import '../../style/contact/contact.css'
-import { useContactListQuery , useDeleteContactMutation} from '../../features/apiSlice'
-import {BsEyeFill , BsPencilSquare , BsFillTrashFill} from 'react-icons/bs'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import "../../style/contact/contact.css";
+import {
+  useContactListQuery,
+  useDeleteContactMutation,
+} from "../../features/apiSlice";
+import { BsEyeFill, BsPencilSquare, BsFillTrashFill } from "react-icons/bs";
+import { NavLink, useNavigate } from "react-router-dom";
+
 
 export default function Contacts() {
+  const navigate = useNavigate();
 
-  const {data, isLoading: getContacts , isSuccess} = useContactListQuery();
-  const { mutate: deleteContactMutation } = useDeleteContactMutation();
+  const { data, isLoading: contactLoading } = useContactListQuery();
+  const [
+    deleteContact,
+    { isLoading: isDeleting },
+  ] = useDeleteContactMutation();
 
-  const handleDelete = async (id) => {
-    console.log(id);
-    // try {
-    //   const response = await deleteContactMutation({ id });
-    //   console.log(Response);
-    // } catch (error) {
-    //     console.log(error);
-    // }
-  }
 
- 
   
+  const handleDelete = async (id) => {
+    try {
+      await deleteContact(id).then(()=>navigate('/contact-list'));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
-    {getContacts ? <p id='loading'>Loading...</p> : (
-        <div className='table-container'>
+      {contactLoading ? (
+        <p id="loading">Loading...</p>
+      ) : (
+        <div className="table-container">
           <div className="table-content">
             <div className="table-title">
               <h2>Contact List</h2>
             </div>
-  
+            {isDeleting ? <p id='delete-msg'>Deleting...</p> : null}
             <div className="add-button">
-              <NavLink to='/add-contact'><button>Add</button></NavLink>
+              <NavLink to="/add-contact">
+                <button>Add</button>
+              </NavLink>
             </div>
           </div>
           <table>
-            <thead>
+          <thead>
               <tr>
                 <th>user ID</th>
                 <th>Customer</th>
@@ -46,29 +56,41 @@ export default function Contacts() {
               </tr>
             </thead>
             <tbody>
-            {data.contacts.map((contact, index) => (
-                <tr key={index}>
-                  <td>{contact.userID}</td>
-                  <td>{contact.fullname}</td>
+              {data.contacts.map((contact) => (
+                <tr key={contact.id}>
+                
+                  <td>{contact.id}</td>
+                  <td>{contact.contactName}</td>
                   <td>{contact.email}</td>
                   <td>{contact.mobileNo}</td>
                   <td>{contact.address}</td>
                   <td>
-                    <div className='table-actions'>
-                    <NavLink to='/show/${contact.id}'> <i id='view'><BsEyeFill/></i></NavLink> 
-                    <NavLink to='/edit'><i id='edit'><BsPencilSquare/></i></NavLink> 
-                    <button onClick={()=>{handleDelete(contact.id)}}><i id='delete' ><BsFillTrashFill/></i> </button>
+                    <div className="table-actions">
+                    <button>
+                        <i id="edit">
+                          <BsPencilSquare />
+                        </i>{" "}
+                      </button>
+                      <button >
+                       <NavLink to={`/contact-detail/${contact.id}`}> 
+                        <i id="view">
+                          <BsEyeFill />
+                        </i>{" "}</NavLink>
+                      </button>
+                      <button onClick={() => handleDelete(contact.id)}>
+                        <i id="delete">
+                          <BsFillTrashFill />
+                        </i>{" "}
+                      </button>
                     </div>
                   </td>
-                </tr>)
-                
-              )}
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
-      ) }
+      )}
     </>
   );
-  
-
 }
+

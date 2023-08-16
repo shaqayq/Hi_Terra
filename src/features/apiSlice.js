@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const terraApi = createApi({
   reducerPath: "terraApi",
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:8000/api" }),
+   idType: 'uuid',
   endpoints: (builder) => ({
     getFarms: builder.query({
       query: () => "getfarms",
@@ -27,8 +28,17 @@ export const terraApi = createApi({
       query: (id) => ({
         url: `/contacts/${id}`,
         method: "DELETE",
-        credentials: 'include',
+       
       }),
+      
+    }),
+    getContactDetail: builder.mutation({
+      query: (id) => ({
+        url: `/contacts/${id}`,
+        method: "GET",
+       
+      }),
+      
     }),
   }),
 });
@@ -40,4 +50,5 @@ export const {
   useContactListQuery,
   useLoginMutation,
   useDeleteContactMutation,
+  useGetContactDetailMutation
 } = terraApi;
