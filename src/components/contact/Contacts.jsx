@@ -12,6 +12,7 @@ export default function Contacts() {
   const navigate = useNavigate();
 
   const { data, isLoading: contactLoading } = useContactListQuery();
+  
   const [
     deleteContact,
     { isLoading: isDeleting },

@@ -32,13 +32,8 @@ export const terraApi = createApi({
       }),
       
     }),
-    getContactDetail: builder.mutation({
-      query: (id) => ({
-        url: `/contacts/${id}`,
-        method: "GET",
-       
-      }),
-      
+    getContactDetail: builder.query({
+      query: (id) => `contacts/${id}`, 
     }),
   }),
 });
@@ -50,5 +45,5 @@ export const {
   useContactListQuery,
   useLoginMutation,
   useDeleteContactMutation,
-  useGetContactDetailMutation
+  useGetContactDetailQuery
 } = terraApi;
