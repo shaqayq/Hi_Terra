@@ -27,7 +27,7 @@ export default function NewContact() {
   const { data, isLoading } = useGetUsersQuery();
   const [
     createContact,
-    { isLoading: createLoading, isError: userCreateField },
+    { isLoading: createLoading, isError: userCreateField , isSuccess},
   ] = useCreateContactMutation();
 
   if (isLoading) {
@@ -47,7 +47,11 @@ export default function NewContact() {
       const response = await createContact(formData);
   
       if(response){
-        navigat('/contact-list')
+        setTimeout(() => {
+          navigat('/contact-list');
+        
+        }, 1000); 
+     
       }
    
     } catch (error) {
@@ -59,7 +63,9 @@ export default function NewContact() {
     <>
       <div className="newContact">
         {userCreateField ? <>Error</> : <></>}
+        
         <div className="form-container">
+          {isSuccess ? <p id="success-msg">Contact Create Successfully!</p> : <></>}
           <h2 className="form-title">Add New Contact </h2>
           <form className="contact-form" onSubmit={handleSubmit} method="PUT">
             <div className="form-group">

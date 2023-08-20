@@ -39,8 +39,10 @@ export default function EditContact() {
       try {
         const response = await editContact({ id: contact_id, ...formData });
         console.log(response);
-        if (response) {
-          navigate('/contact-list');
+        if(response){
+          setTimeout(() => {
+            navigate('/contact-list');
+          }, 2000); 
         }
       } catch (error) {
         console.error('Edit contact error:', error);
@@ -62,12 +64,15 @@ export default function EditContact() {
   
     const detail = contactData.contacts;
     const user = userData.users;
-  
+  console.log(formData);
     return (
       <div className="newContact">
-        {editError ? <p>Error</p> : null}
+       
         <div className="form-container">
+        {editError ? <p>Error</p> : null}
+        {editSuccess ? <p id='success-msg'>Contact Edit Successfully!</p>:<></>}
           <h2 className="form-title">Edit Contact</h2>
+          
           <form className="contact-form" method="POST" onSubmit={handleSubmit}>
             <div className="form-group">
               <select
@@ -76,7 +81,7 @@ export default function EditContact() {
                 onChange={handleChange}
                 value={formData.userId || detail.userId}
               >
-                <option>--select userID--</option>
+                <option>{detail.fullName}</option>
                 {user.map((user) => (
                   <option key={user.id} value={user.id}>
                     {user.fullname}
@@ -116,7 +121,7 @@ export default function EditContact() {
               >
                 <option>--select contact status--</option>
                 {Object.entries(statuses).map(([status, value]) => (
-                  <option key={status} value={formData.status || detail.status}>
+                  <option key={status} value={value}>
                     {status}
                   </option>
                 ))}

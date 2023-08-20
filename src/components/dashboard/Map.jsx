@@ -7,7 +7,7 @@ import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import "../../style/dashboard/map.css";
 import SelectBox from "./SelectBox";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { useGetFarmsQuery } from "../../features/apiSlice";
+import { useGetFarmsQuery , useGetTasksQuery} from "../../features/apiSlice";
 
 let DefaultIcon = L.icon({
   iconUrl: icon,
@@ -17,79 +17,48 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 export default function Map() {
-  let result= null;
-
   const [selectedOptions, setSelectedOptions] = useState([]);
-  const { data, error, isLoading, isSuccess: GetTotalFarms } = useGetFarmsQuery();
+  const { data: totalFarm, error, isLoading: farmLoading, isSuccess: farmSuccess } = useGetFarmsQuery();
+
   const [selectedFarms, setSelectedFarms] = useState([]);
 
   const handleSelectBoxChange = (newSelectedOptions) => {
     setSelectedOptions(newSelectedOptions);
   };
- 
- 
- 
-  let markers;
 
-  if( GetTotalFarms){
-    const farmsLocation = selectedOptions.length > 0 ? selectedOptions : data.farmsResult;
-     if(data.farmsResult?.length > 0 || selectedOptions.length > 0){
-        console.log(farmsLocation);
-        markers = farmsLocation.map((location, index) => (
-          <span key={index}>
-            {(location.latitude !== null || location.longitude !== null) &&
-              (selectedFarms.length === 0 || selectedFarms.includes(location.id)) && (
-              <Marker
-                key={index}
-                position={[location.latitude, location.longitude]}
-              >
-                <Popup>
-                  <div>{location.farmName}</div>
-                </Popup>
-              </Marker>
-            )}
-          </span>
-        ))
+  if (!farmSuccess) {
+    return <p>Loading data...</p>;
   }
 
-   result = data.farmsResult;
-}
- if(isLoading){
-  return <p>Laoding......</p>
- }
+  const farmOptionResult = totalFarm.farmsResult;
+ 
 
-
+  const farmsLocation = selectedOptions.length > 0 ? selectedOptions : farmOptionResult;
+  const markers = farmsLocation.map((location, index) => (
+    <span key={index}>
+      {(location.latitude !== null || location.longitude !== null) &&
+      (selectedFarms.length === 0 || selectedFarms.includes(location.id)) && (
+        <Marker
+          key={index}
+          position={[location.latitude, location.longitude]}
+        >
+          <Popup>
+            <div>{location.farmName}</div>
+          </Popup>
+        </Marker>
+      )}
+    </span>
+  ));
 
   return (
     <>
       <div className="map-container">
         <div className="filter-box">
           <div className="options">
-          <SelectBox
-              options={result || []}
-              msg="Farm"
-              onChange={handleSelectBoxChange} 
+            <SelectBox
+              onChange={handleSelectBoxChange}
             />
-          {/* <SelectBox options={options.crop} msg="crop" />
-          <SelectBox options={options.task} msg="task" /> */}
-      <div className="dropdown">
-        <button className="dropbtn">
-          TASK
-          <RiArrowDropDownLine />
-        </button>
-        <div className="dropdown-content">
-          
-        </div>
-      </div>
-      <div className="dropdown">
-        <button className="dropbtn">
-          CROP
-          <RiArrowDropDownLine />
-        </button>
-        <div className="dropdown-content">
-         
-        </div>
-      </div>
+            {/* Other dropdowns */}
           </div>
         </div>
         <div className="map">

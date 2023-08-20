@@ -62,3 +62,8 @@
     border-radius: 5px;
     margin-top: 3px;
   }
+
+  #success-msg{
+    color: rgb(36, 196, 36);
+    font-size: 20px;
+  }

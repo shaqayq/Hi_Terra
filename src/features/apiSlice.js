@@ -56,6 +56,12 @@ export const terraApi = createApi({
         body: contactData,
       }),
     }),
+    getTasks: builder.query({
+      query: () => "tasks",
+    }),
+    getTaskById: builder.query({
+      query: (id) => `/tasks/${id}`, 
+    }),
   }),
 });
 
@@ -69,5 +75,7 @@ export const {
   useDeleteContactMutation,
   useGetContactDetailQuery,
   useCreateContactMutation,
-  useEditContactMutation
+  useEditContactMutation,
+  useGetTasksQuery,
+  useGetTaskByIdQuery
 } = terraApi;

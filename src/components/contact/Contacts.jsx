@@ -38,7 +38,7 @@ export default function Contacts() {
             <div className="table-title">
               <h2>Contact List</h2>
             </div>
-            {isDeleting ? <p id='delete-msg'>Deleting...</p> : null}
+            {isDeleting ? <p id='delete-msg'>Contact Delete Successfully!</p> : null}
             <div className="add-button">
               <NavLink to="/add-contact">
                 <button>Add</button>
